@@ -21,6 +21,7 @@ List of fully functional commands:
 To add the module follow the next steps:
 1. Go into the folder <source_of_335>/modules
 2. Clone the repository here.
+
 On windows, open git bash and paste this command:
 ```
 git clone https://github.com/wizzymore/mod_world_chat.git
