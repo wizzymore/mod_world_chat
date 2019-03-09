@@ -17,12 +17,19 @@ List of fully functional commands:
   
 # Installation
 ## Core Setup
-Download the current version of the module from here:
-https://github.com/wizzymore/AzerothCoreModules/releases/tag/mod_world_chat
 
 To add the module follow the next steps:
-1. Download the module and place it in <source_of_335>/modules
-2. Compile and follow the next step to setup the database.
+1. Go into the folder <source_of_335>/modules
+2. Clone the repository here:
+###Windows
+Open git bash and paste this command
+```
+git clone https://github.com/wizzymore/mod_world_chat.git
+```
+###Linux
+```
+git clone https://github.com/wizzymore/mod_world_chat.git
+```
 
 ## Database Setup
 ### Setting up commands
