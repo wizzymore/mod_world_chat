@@ -7,23 +7,23 @@
 <--------------------------------------------------------------------------->
 */
 
-#include "ScriptPCH.h"
-#include "Config.h"
+#include "ScriptMgr.h"
 #include "Log.h"
 #include "Chat.h"
 #include "Common.h"
 #include "World.h"
 #include "WorldSession.h"
+#include "Config.h"
 #include <unordered_map>
 
 /* VERSION */
-float ver = 1.1f;
+float ver = 1.0f;
 
 /* Colors */
 std::string WORLD_CHAT_ALLIANCE_BLUE = "|cff3399FF";
 std::string WORLD_CHAT_HORDE_RED = "|cffCC0000";
 std::string WORLD_CHAT_WHITE = "|cffFFFFFF";
-std::string WORLD_CHAT_GREEN = "|cff00cc00";
+std::string WORLD_CHAT_GREEN = "|cff00CC00";
 std::string WORLD_CHAT_RED = "|cffFF0000";
 std::string WORLD_CHAT_BLUE = "|cff6666FF";
 std::string WORLD_CHAT_BLACK = "|cff000000";
@@ -64,11 +64,6 @@ std::string world_chat_TeamIcon[2] =
     "|cffCC0000Horde|r"
 };
 
-
-/* CONFIG VARIABLES */
-int config_ChatEnabled = 1;
-int config_ChatCrossFactions = 1;
-
 /* STRUCTURE FOR WorldChat map */
 struct ChatElements
 {
@@ -89,7 +84,7 @@ public:
     static bool HandleWorldChatCommand(ChatHandler * pChat, const char * msg)
     {
 
-        if (!config_ChatEnabled) {
+        if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
             Player* player = pChat->GetSession()->GetPlayer();
             ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED);
             return true;
@@ -122,7 +117,7 @@ public:
 
             if (WorldChat[guid2].chat == 1)
             {
-                if (config_ChatCrossFactions) {
+                if (sConfigMgr->GetBoolDefault("World_Chat.CrossFactions", true)) {
                     if (player->IsGameMaster()) {
                         snprintf(message, 1024, "[World][%s][%s%s|r]: %s%s|r", world_chat_GMIcon.c_str(), world_chat_ClassColor[player->getClass() - 1].c_str(), player->GetName().c_str(), WORLD_CHAT_WHITE.c_str(), msg);
                     }
@@ -159,7 +154,7 @@ public:
     static bool HandleWorldChatHordeCommand(ChatHandler * pChat, const char * msg)
     {
 
-        if (!config_ChatEnabled) {
+        if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
             Player* player = pChat->GetSession()->GetPlayer();
             ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED);
             return true;
@@ -203,7 +198,7 @@ public:
     static bool HandleWorldChatAllianceCommand(ChatHandler * pChat, const char * msg)
     {
 
-        if (!config_ChatEnabled) {
+        if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
             Player* player = pChat->GetSession()->GetPlayer();
             ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED);
             return true;
@@ -249,13 +244,13 @@ public:
         Player* player = handler->GetSession()->GetPlayer();
         uint32 guid = player->GetGUID();
 
-        if (!config_ChatEnabled) {
+        if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
             ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED);
             return true;
         }
 
         if (WorldChat[guid].chat) {
-            ChatHandler(player->GetSession()).PSendSysMessage("%s[WC] World Chat is already visible.|r", WORLD_CHAT_RED);
+            ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is already visible.|r", WORLD_CHAT_RED);
             return true;
         }
 
@@ -264,7 +259,7 @@ public:
         char message[512];
 
 
-        ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is now visible. (.chat off to hide)|r", WORLD_CHAT_GREEN);
+        ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is now visible.|r", WORLD_CHAT_GREEN);
         sWorld->SendGlobalText(message, NULL);
 
         return true;
@@ -275,13 +270,13 @@ public:
         Player* player = handler->GetSession()->GetPlayer();
         uint32 guid = player->GetGUID();
 
-        if (!config_ChatEnabled) {
+        if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
             ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED);
             return true;
         }
 
         if (!WorldChat[guid].chat) {
-            ChatHandler(player->GetSession()).PSendSysMessage("%s[WC] World Chat is already hidden.|r", WORLD_CHAT_RED);
+            ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is already hidden.|r", WORLD_CHAT_RED);
             return true;
         }
 
@@ -289,7 +284,7 @@ public:
 
         char message[512];
 
-        ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is now hidden. (.chat on to show)|r", WORLD_CHAT_GREEN);
+        ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is now hidden.|r", WORLD_CHAT_GREEN);
         sWorld->SendGlobalText(message, NULL);
 
         return true;
@@ -316,15 +311,18 @@ public:
 class WorldChat_Config : public WorldScript
 {
 public: WorldChat_Config() : WorldScript("WorldChat_Config") { };
-
-        virtual void OnConfigLoad(bool /*reload*/)
+        void OnBeforeConfigLoad(bool reload) override
         {
-            config_ChatEnabled = sConfigMgr->GetBoolDefault("World_Chat.Enable", true);
-            config_ChatCrossFactions = sConfigMgr->GetBoolDefault("World_Chat.CrossFactions", false); 
+            if (!reload) {
+                sLog->outString(_CONF_DIR);
+                std::string cfg_file = conf_path + "/WorldChat.conf.dist";
+
+                sConfigMgr->LoadMore(cfg_file.c_str());
+            }
         }
 };
 
-void AddWorldChatScripts()
+void AddSC_WorldChatScripts()
 {
     new WorldChat_Config;
     new World_Chat;
