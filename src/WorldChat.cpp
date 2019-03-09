@@ -314,9 +314,11 @@ public: WorldChat_Config() : WorldScript("WorldChat_Config") { };
         void OnBeforeConfigLoad(bool reload) override
         {
             if (!reload) {
-                sLog->outString(_CONF_DIR);
-                std::string cfg_file = conf_path + "/WorldChat.conf.dist";
+                std::string conf_path = _CONF_DIR;
+                std::string cfg_file = conf_path + "/WorldChat.conf";
+                std::string cfg_file_2 = cfg_file + ".dist";
 
+                sConfigMgr->LoadMore(cfg_file_2.c_str());
                 sConfigMgr->LoadMore(cfg_file.c_str());
             }
         }
