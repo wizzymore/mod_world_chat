@@ -41,6 +41,7 @@ INSERT INTO `command` (`name`, `security`, `help`) VALUES ('chat', 0, 'Syntax: .
 ```
 
 ## Server Config Setup
+### On Windows
 Create a file named : "WorldChat.conf" or copy the one from <build_of_335>/bin/<your_build_method/WorldChat.conf
 ```
 ###################################################################################################
@@ -67,5 +68,11 @@ World_Chat.CrossFactions = false
 #
 ###################################################################################################
 ```
+### On Linux
+Navigate to /etc/ folder from your azeroth build files and execute this command:
+```bash
+cp WorldChat.conf.dist WorldChat.conf
+```
+Edit the settings in the .conf file but keep both!
 ## Start the server and enjoy
 Done, you are ready to use the World Chat System! Go online and try it out!
