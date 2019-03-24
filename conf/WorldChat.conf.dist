@@ -21,4 +21,13 @@ World_Chat.Enable = true
 World_Chat.CrossFactions = false
 
 #
+#    World_Chat.CrossFactions
+#        Description: Enables world chatting cross-faction
+#        Default:     True - (Enabled)
+#                     False - (Disabled)
+#
+
+World_Chat.OnLogin.State = true
+
+#
 ###################################################################################################
