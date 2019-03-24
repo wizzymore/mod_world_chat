@@ -64,10 +64,26 @@ std::string world_chat_TeamIcon[2] =
     "|cffCC0000Horde|r"
 };
 
+class WorldChat_Config : public WorldScript
+{
+public: WorldChat_Config() : WorldScript("WorldChat_Config") { };
+    void OnBeforeConfigLoad(bool reload) override
+    {
+        if (!reload) {
+            std::string conf_path = _CONF_DIR;
+            std::string cfg_file = conf_path + "/WorldChat.conf";
+            std::string cfg_file_2 = cfg_file + ".dist";
+
+            sConfigMgr->LoadMore(cfg_file_2.c_str());
+            sConfigMgr->LoadMore(cfg_file.c_str());
+        }
+    }
+};
+
 /* STRUCTURE FOR WorldChat map */
 struct ChatElements
 {
-    uint8 chat = 0; // CHAT DISABLED BY DEFAULT
+    uint8 chat = (sConfigMgr->GetBoolDefault("World_Chat.OnLogin.State", true)) ? 1 : 0; // CHAT DISABLED BY DEFAULT
 };
 
 /* UNORDERED MAP FOR STORING IF CHAT IS ENABLED OR DISABLED */
@@ -306,22 +322,6 @@ public:
         };
         return commandTable;
     }
-};
-
-class WorldChat_Config : public WorldScript
-{
-public: WorldChat_Config() : WorldScript("WorldChat_Config") { };
-        void OnBeforeConfigLoad(bool reload) override
-        {
-            if (!reload) {
-                std::string conf_path = _CONF_DIR;
-                std::string cfg_file = conf_path + "/WorldChat.conf";
-                std::string cfg_file_2 = cfg_file + ".dist";
-
-                sConfigMgr->LoadMore(cfg_file_2.c_str());
-                sConfigMgr->LoadMore(cfg_file.c_str());
-            }
-        }
 };
 
 void AddSC_WorldChatScripts()
