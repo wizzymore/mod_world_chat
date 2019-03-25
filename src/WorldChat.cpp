@@ -276,7 +276,6 @@ public:
 
 
         ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is now visible.|r", WORLD_CHAT_GREEN.c_str());
-        sWorld->SendGlobalText(message, NULL);
 
         return true;
     };
@@ -301,7 +300,6 @@ public:
         char message[512];
 
         ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is now hidden.|r", WORLD_CHAT_GREEN.c_str());
-        sWorld->SendGlobalText(message, NULL);
 
         return true;
     };
