@@ -35,9 +35,12 @@ git clone https://github.com/wizzymore/mod_world_chat.git
 ## Database Setup
 ### Setting up commands
 ```sql
-INSERT INTO `command` (`name`, `security`, `help`) VALUES ('chata', 1, 'Syntax: .chata $text - To speak as a GM only to Alliance');
-INSERT INTO `command` (`name`, `security`, `help`) VALUES ('chath', 1, 'Syntax: .chath $text - To speak as a GM only to Horde');
-INSERT INTO `command` (`name`, `security`, `help`) VALUES ('chat', 0, 'Syntax: .chat $text\n.chat on To show World Chat\n.chat off To hide World Chat');
+DELETE FROM `command` WHERE name IN ('chata', 'chath', 'chat');
+
+INSERT INTO `command` (`name`, `security`, `help`) VALUES 
+('chata', 1, 'Syntax: .chata $text - To speak as a GM only to Alliance'),
+('chath', 1, 'Syntax: .chath $text - To speak as a GM only to Horde'),
+('chat', 0, 'Syntax: .chat $text\n.chat on To show World Chat\n.chat off To hide World Chat');
 ```
 
 ## Server Config Setup
