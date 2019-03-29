@@ -45,37 +45,15 @@ INSERT INTO `command` (`name`, `security`, `help`) VALUES
 
 ## Server Config Setup
 ### On Windows
-Create a file named : "WorldChat.conf" or copy the one from <build_of_335>/bin/<your_build_method/WorldChat.conf
-```
-###################################################################################################
-# WIZZY WORLD CHAT SYSTEM
-#
-# These settings control WiiZZy's World Chat System
-#
-#    World_Chat.Enable
-#        Description: Enables WiiZZy's World Chat System
-#        Default:     True - (Enabled)
-#                     False - (Disabled)
+Modify the config : "WorldChat.conf" by your needs.
+Edit the settings in the .conf file but keep both!
 
-World_Chat.Enable = true
-
-#
-#    World_Chat.CrossFactions
-#        Description: Enables world chatting cross-faction
-#        Default:     False - (Disabled)
-#                     True - (Enabled)
-#
-
-World_Chat.CrossFactions = false
-
-#
-###################################################################################################
-```
 ### On Linux
 Navigate to /etc/ folder from your azeroth build files and execute this command:
 ```bash
 cp WorldChat.conf.dist WorldChat.conf
 ```
+Modify the config : "WorldChat.conf" by your needs.
 Edit the settings in the .conf file but keep both!
 ## Start the server and enjoy
 Done, you are ready to use the World Chat System! Go online and try it out!
