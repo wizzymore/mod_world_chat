@@ -1,3 +1,7 @@
+# ![logo](https://raw.githubusercontent.com/azerothcore/azerothcore.github.io/master/images/logo-github.png) AzerothCore
+- Latest build status with azerothcore: [![Build Status](https://travis-ci.org/azerothcore/mod-world-chat.svg?branch=master)](https://travis-ci.org/azerothcore/mod-world-chat)
+# World Chat
+
 # Description
 World Chat Module enables you to talk globally with your faction or with both factions (if enabled by server).
 
