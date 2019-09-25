@@ -301,9 +301,6 @@ public:
 
         WorldChat[guid].chat = 1;
 
-        char message[512];
-
-
         ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is now visible.|r", WORLD_CHAT_GREEN.c_str());
 
         return true;
@@ -325,8 +322,6 @@ public:
         }
 
         WorldChat[guid].chat = 0;
-
-        char message[512];
 
         ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is now hidden.|r", WORLD_CHAT_GREEN.c_str());
 
