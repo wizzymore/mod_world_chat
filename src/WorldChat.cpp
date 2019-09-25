@@ -113,7 +113,7 @@ public:
         uint32 guid = player->GetGUID();
 
 		if (!player->CanSpeak()){
-			ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sYou can't use World Chat while mutted!|r", WORLD_CHAT_RED.c_str());
+			ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sYou can't use World Chat while muted!|r", WORLD_CHAT_RED.c_str());
 			return false;
 		}
 
@@ -196,7 +196,7 @@ public:
         uint32 guid = player->GetGUID();
 
 		if (!player->CanSpeak()){
-			ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sYou can't use World Chat while mutted!|r", WORLD_CHAT_RED.c_str());
+			ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sYou can't use World Chat while muted!|r", WORLD_CHAT_RED.c_str());
 			return false;
 		}
 
@@ -254,7 +254,7 @@ public:
         uint32 guid = player->GetGUID();
 
 		if (!player->CanSpeak()){
-			ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sYou can't use World Chat while mutted!|r", WORLD_CHAT_RED.c_str());
+			ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sYou can't use World Chat while muted!|r", WORLD_CHAT_RED.c_str());
 			return false;
 		}
 
