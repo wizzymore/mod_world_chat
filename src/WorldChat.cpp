@@ -101,7 +101,6 @@ public:
     {
 
         if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
-            Player* player = pChat->GetSession()->GetPlayer();
             ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED.c_str());
             return true;
         }
@@ -184,7 +183,6 @@ public:
     {
 
         if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
-            Player* player = pChat->GetSession()->GetPlayer();
             ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED.c_str());
             return true;
         }
@@ -237,7 +235,6 @@ public:
     {
 
         if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
-            Player* player = pChat->GetSession()->GetPlayer();
             ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED.c_str());
             return true;
         }
