@@ -9,6 +9,7 @@
 
 #include "ScriptMgr.h"
 #include "Log.h"
+#include "Player.h"
 #include "Chat.h"
 #include "Common.h"
 #include "World.h"
