@@ -9,6 +9,7 @@
 
 #include "ScriptMgr.h"
 #include "Log.h"
+#include "Player.h"
 #include "Chat.h"
 #include "Common.h"
 #include "World.h"
@@ -101,7 +102,6 @@ public:
     {
 
         if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
-            Player* player = pChat->GetSession()->GetPlayer();
             ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED.c_str());
             return true;
         }
@@ -110,7 +110,7 @@ public:
             return false;
 
         Player* player = pChat->GetSession()->GetPlayer();
-        uint32 guid = player->GetGUID();
+        uint64 guid = player->GetGUID();
 
 		if (!player->CanSpeak()){
 			ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sYou can't use World Chat while muted!|r", WORLD_CHAT_RED.c_str());
@@ -142,7 +142,7 @@ public:
 
 
             Player* target = itr->second->GetPlayer();
-            uint32 guid2 = target->GetGUID();
+            uint64 guid2 = target->GetGUID();
 
             if (WorldChat[guid2].chat == 1)
             {
@@ -184,7 +184,6 @@ public:
     {
 
         if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
-            Player* player = pChat->GetSession()->GetPlayer();
             ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED.c_str());
             return true;
         }
@@ -193,7 +192,7 @@ public:
             return false;
 
         Player* player = pChat->GetSession()->GetPlayer();
-        uint32 guid = player->GetGUID();
+        uint64 guid = player->GetGUID();
 
         if (!WorldChat[guid].chat) {
             ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is disabled. (.chat)|r", WORLD_CHAT_RED.c_str());
@@ -221,7 +220,7 @@ public:
 
 
             Player* target = itr->second->GetPlayer();
-            uint32 guid2 = target->GetGUID();
+            uint64 guid2 = target->GetGUID();
 
             if (WorldChat[guid2].chat == 1 && (target->GetTeamId() == TEAM_HORDE || target->IsGameMaster()))
             {
@@ -237,7 +236,6 @@ public:
     {
 
         if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
-            Player* player = pChat->GetSession()->GetPlayer();
             ChatHandler(pChat->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED.c_str());
             return true;
         }
@@ -246,7 +244,7 @@ public:
             return false;
 
         Player* player = pChat->GetSession()->GetPlayer();
-        uint32 guid = player->GetGUID();
+        uint64 guid = player->GetGUID();
 
         if (!WorldChat[guid].chat) {
             ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is disabled. (.chat)|r", WORLD_CHAT_RED.c_str());
@@ -274,7 +272,7 @@ public:
 
 
             Player* target = itr->second->GetPlayer();
-            uint32 guid2 = target->GetGUID();
+            uint64 guid2 = target->GetGUID();
 
             if (WorldChat[guid2].chat == 1 && (target->GetTeamId() == TEAM_ALLIANCE || target->IsGameMaster()))
             {
@@ -286,10 +284,10 @@ public:
         return true;
     }
 
-    static bool HandleWorldChatOnCommand(ChatHandler* handler, const char* msg)
+    static bool HandleWorldChatOnCommand(ChatHandler* handler, const char* /*msg*/)
     {
         Player* player = handler->GetSession()->GetPlayer();
-        uint32 guid = player->GetGUID();
+        uint64 guid = player->GetGUID();
 
         if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
             ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED.c_str());
@@ -303,18 +301,15 @@ public:
 
         WorldChat[guid].chat = 1;
 
-        char message[512];
-
-
         ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is now visible.|r", WORLD_CHAT_GREEN.c_str());
 
         return true;
     };
 
-    static bool HandleWorldChatOffCommand(ChatHandler* handler, const char* msg)
+    static bool HandleWorldChatOffCommand(ChatHandler* handler, const char* /*msg*/)
     {
         Player* player = handler->GetSession()->GetPlayer();
-        uint32 guid = player->GetGUID();
+        uint64 guid = player->GetGUID();
 
         if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
             ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED.c_str());
@@ -328,8 +323,6 @@ public:
 
         WorldChat[guid].chat = 0;
 
-        char message[512];
-
         ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat is now hidden.|r", WORLD_CHAT_GREEN.c_str());
 
         return true;
@@ -339,8 +332,8 @@ public:
     {
         static std::vector<ChatCommand> wcCommandTable =
         {
-            { "on",      SEC_PLAYER,     true,     &HandleWorldChatOnCommand,      "" },
-            { "off",     SEC_PLAYER,     true,    &HandleWorldChatOffCommand,       "" },
+            { "on",      SEC_PLAYER,     false,     &HandleWorldChatOnCommand,      "" },
+            { "off",     SEC_PLAYER,     false,    &HandleWorldChatOffCommand,       "" },
             { "",        SEC_PLAYER,     false,    &HandleWorldChatCommand,       "" },
         };
         static std::vector<ChatCommand> commandTable =
