@@ -284,7 +284,7 @@ public:
         return true;
     }
 
-    static bool HandleWorldChatOnCommand(ChatHandler* handler, const char* msg)
+    static bool HandleWorldChatOnCommand(ChatHandler* handler)
     {
         Player* player = handler->GetSession()->GetPlayer();
         uint32 guid = player->GetGUID();
@@ -306,7 +306,7 @@ public:
         return true;
     };
 
-    static bool HandleWorldChatOffCommand(ChatHandler* handler, const char* msg)
+    static bool HandleWorldChatOffCommand(ChatHandler* handler)
     {
         Player* player = handler->GetSession()->GetPlayer();
         uint32 guid = player->GetGUID();
