@@ -284,7 +284,7 @@ public:
         return true;
     }
 
-    static bool HandleWorldChatOnCommand(ChatHandler* handler)
+    static bool HandleWorldChatOnCommand(ChatHandler* handler, const char* /*msg*/)
     {
         Player* player = handler->GetSession()->GetPlayer();
         uint32 guid = player->GetGUID();
@@ -306,7 +306,7 @@ public:
         return true;
     };
 
-    static bool HandleWorldChatOffCommand(ChatHandler* handler)
+    static bool HandleWorldChatOffCommand(ChatHandler* handler, const char* /*msg*/)
     {
         Player* player = handler->GetSession()->GetPlayer();
         uint32 guid = player->GetGUID();
@@ -332,8 +332,8 @@ public:
     {
         static std::vector<ChatCommand> wcCommandTable =
         {
-            { "on",      SEC_PLAYER,     true,     &HandleWorldChatOnCommand,      "" },
-            { "off",     SEC_PLAYER,     true,    &HandleWorldChatOffCommand,       "" },
+            { "on",      SEC_PLAYER,     false,     &HandleWorldChatOnCommand,      "" },
+            { "off",     SEC_PLAYER,     false,    &HandleWorldChatOffCommand,       "" },
             { "",        SEC_PLAYER,     false,    &HandleWorldChatCommand,       "" },
         };
         static std::vector<ChatCommand> commandTable =
