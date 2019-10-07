@@ -1,5 +1,5 @@
 # ![logo](https://raw.githubusercontent.com/azerothcore/azerothcore.github.io/master/images/logo-github.png) AzerothCore
-- Latest build status with azerothcore: [![Build Status](https://travis-ci.org/azerothcore/mod-world-chat.svg?branch=master)](https://travis-ci.org/azerothcore/mod-world-chat)
+- Latest build status with azerothcore: [![Build Status](https://travis-ci.org/wizzymore/mod-world-chat.svg?branch=master)](https://travis-ci.org/wizzymore/mod-world-chat)
 # World Chat
 
 # Description
