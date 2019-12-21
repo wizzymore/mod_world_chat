@@ -38,14 +38,13 @@ git clone https://github.com/wizzymore/mod_world_chat.git
 
 ## Database Setup
 ### Setting up commands
-```sql
-DELETE FROM `command` WHERE name IN ('chata', 'chath', 'chat');
+Open DB-Assembler and use the option 8) Import-customs
 
-INSERT INTO `command` (`name`, `security`, `help`) VALUES 
-('chata', 1, 'Syntax: .chata $text - To speak as a GM only to Alliance'),
-('chath', 1, 'Syntax: .chath $text - To speak as a GM only to Horde'),
-('chat', 0, 'Syntax: .chat $text\n.chat on To show World Chat\n.chat off To hide World Chat');
-```
+OR
+
+Run the following sql file in your database: [this](/sql/world/command.sql)
+
+
 
 ## Server Config Setup
 ### On Windows
