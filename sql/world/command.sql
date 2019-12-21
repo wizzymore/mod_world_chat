@@ -1,4 +1,4 @@
-DELETE FROM `command` WHERE name IN ('chata', 'chath', 'chat');
+DELETE FROM `command` WHERE name IN ('chat', 'chata', 'chath');
 
 INSERT INTO `command` (`name`, `security`, `help`) VALUES 
 ('chata', 1, 'Syntax: .chata $text - To speak as a GM only to Alliance'),
