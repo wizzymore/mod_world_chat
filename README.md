@@ -7,13 +7,13 @@ World Chat Module is a simple global ( faction or cross-faction ) chat for Azero
 
 # Functionality
 * How to chat?
--.chat Message - This works for everyone, GM and players.
+    - .chat Message - This works for everyone, GM and players.
 
 * How a GM can send a message to the other faction chat if cross-faction is disabled?
--Use .chat command followed by the initial of the faction ( Example: For horde use .chath <Message> )
+    - Use .chat command followed by the initial of the faction ( Example: For horde use .chath <Message> )
     
 * How can i show or hide by gm status?
--You can show your GM or DEV status by having .gm chat on and .gm on. Also you can be shown as a DEV if you have .dev on
+    - You can show your GM or DEV status by having .gm chat on and .gm on. Also you can be shown as a DEV if you have .dev on
 
 # Commands
 List of fully functional commands:
