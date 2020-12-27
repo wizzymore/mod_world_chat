@@ -3,9 +3,19 @@
 - Latest build status with azerothcore: [![Build Status](https://github.com/azerothcore/mod-world-chat/workflows/core-build/badge.svg?branch=master&event=push)](https://github.com/azerothcore/mod-world-chat)
 
 # Description
-World Chat Module enables you to talk globally with your faction or with both factions (if enabled by server).
+World Chat Module is a simple global ( faction or cross-faction ) chat for AzerothCore.
 
-The GM can see both factions messages if he has the chat active and gm mode on. (.gm on)
+# Functionality
+* How to chat?
+    - .chat Message - This works for everyone, GM and players.
+    - /join World and talk as in a normal chat ( This name is subject of change based on the config file )
+
+* How a GM can send a message to the other faction chat if cross-faction is disabled?
+    - Use .chat command followed by the initial of the faction ( Example: For horde use .chath <Message> )
+    
+* How can i show or hide by gm status?
+    - You can show your GM or DEV status by having .gm chat on and .gm on. Also you can be shown as a DEV if you have .dev on
+
 # Commands
 List of fully functional commands:
 * .chat <$TEXT>
