@@ -8,6 +8,7 @@ World Chat Module is a simple global ( faction or cross-faction ) chat for Azero
 # Functionality
 * How to chat?
     - .chat Message - This works for everyone, GM and players.
+    - /join World and talk as in a normal chat ( This name is subject of change based on the config file )
 
 * How a GM can send a message to the other faction chat if cross-faction is disabled?
     - Use .chat command followed by the initial of the faction ( Example: For horde use .chath <Message> )
