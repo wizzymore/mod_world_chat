@@ -151,15 +151,18 @@ void SendWorldMessage(Player* sender, const char* msg, int team) {
             if (WC_Config.CrossFaction || (sender->GetTeamId() == target->GetTeamId()) || target->GetSession()->GetSecurity())
             {
                 if (sender->isGMChat()) {
-                    snprintf(message, 1024, "[World][%s][%s|Hplayer:%s|h%s|h|r]: %s%s|r", ((sender->HasFlag(PLAYER_FLAGS, PLAYER_FLAGS_DEVELOPER)) ? (world_chat_ClassColor[5] + "DEV|r").c_str() : world_chat_GMIcon.c_str()) , world_chat_ClassColor[sender->getClass() - 1].c_str(), sender->GetName().c_str(), sender->GetName().c_str(), WORLD_CHAT_WHITE.c_str(), msg);
+                    snprintf(message, 1024, "[World][%s][%s|Hplayer:%s|h%s|h|r]: %s%s|r", ((sender->HasFlag(PLAYER_FLAGS, PLAYER_FLAGS_DEVELOPER)) ? (world_chat_ClassColor[5] + "DEV|r").c_str() : world_chat_GMIcon.c_str()), world_chat_ClassColor[sender->getClass() - 1].c_str(), sender->GetName().c_str(), sender->GetName().c_str(), WORLD_CHAT_WHITE.c_str(), msg);
                 }
                 else {
-                    snprintf(message, 1024, "[World][%s][%s|Hplayer:%s|h%s|h|r]: %s%s|r", world_chat_TeamIcon[sender->GetTeamId()].c_str(), world_chat_ClassColor[sender->getClass() - 1].c_str(), sender->GetName().c_str(), sender->GetName().c_str(), WORLD_CHAT_WHITE.c_str(), msg);
+                    snprintf(message, 1024, "[World][%s][%s|Hplayer:%s|h%u%s|h|r]: %s%s|r", world_chat_TeamIcon[sender->GetTeamId()].c_str(), world_chat_ClassColor[sender->getClass() - 1].c_str(), sender->GetName().c_str(), sender->getLevel(), sender->GetName().c_str(), WORLD_CHAT_WHITE.c_str(), msg);
                 }
                 ChatHandler(target->GetSession()).PSendSysMessage("%s", message);
             }
         }
     }
+
+    sLog->outChat("[WORLD CHAT] Player %s: %s",
+        sender->GetName().c_str(), msg);
 }
 
 class World_Chat : public CommandScript
@@ -284,6 +287,7 @@ public:
             msg = -1;
         }
     }
+
 };
 
 void AddSC_WorldChatScripts()
