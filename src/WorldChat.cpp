@@ -84,13 +84,6 @@ public: WorldChat_Config() : WorldScript("WorldChat_Config") { };
     void OnBeforeConfigLoad(bool reload) override
     {
         if (!reload) {
-            std::string conf_path = _CONF_DIR;
-            std::string cfg_file = conf_path + "/WorldChat.conf";
-            std::string cfg_file_2 = cfg_file + ".dist";
-
-            sConfigMgr->LoadMore(cfg_file_2.c_str());
-            sConfigMgr->LoadMore(cfg_file.c_str());
-
             WC_Config.Enabled = sConfigMgr->GetBoolDefault("World_Chat.Enable", true);
             WC_Config.ChannelName = sConfigMgr->GetStringDefault("World_Chat.ChannelName", "World");
             WC_Config.LoginState = sConfigMgr->GetBoolDefault("World_Chat.OnLogin.State", true);
@@ -121,7 +114,7 @@ void SendWorldMessage(Player* sender, const char* msg, int team) {
         return;
     }
 
-    if (!WorldChat[sender->GetGUID()].chat) {
+    if (!WorldChat[sender->GetGUID().GetCounter()].chat) {
         ChatHandler(sender->GetSession()).PSendSysMessage("[WC] %sWorld Chat is hidden. (.chat off)|r", WORLD_CHAT_RED.c_str());
         return;
     }
@@ -144,7 +137,7 @@ void SendWorldMessage(Player* sender, const char* msg, int team) {
         }
 
         Player* target = itr->second->GetPlayer();
-        uint64 guid2 = target->GetGUID();
+        uint64 guid2 = target->GetGUID().GetCounter();
 
         if (WorldChat[guid2].chat == 1 && (team == -1 || target->GetTeamId() == team))
         {
@@ -203,7 +196,7 @@ public:
     static bool HandleWorldChatOnCommand(ChatHandler* handler, const char* /*msg*/)
     {
         Player* player = handler->GetSession()->GetPlayer();
-        uint64 guid = player->GetGUID();
+        uint64 guid = player->GetGUID().GetCounter();
 
         if (!WC_Config.Enabled) {
             ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED.c_str());
@@ -225,7 +218,7 @@ public:
     static bool HandleWorldChatOffCommand(ChatHandler* handler, const char* /*msg*/)
     {
         Player* player = handler->GetSession()->GetPlayer();
-        uint64 guid = player->GetGUID();
+        uint64 guid = player->GetGUID().GetCounter();
 
         if (!sConfigMgr->GetBoolDefault("World_Chat.Enable", true)) {
             ChatHandler(player->GetSession()).PSendSysMessage("[WC] %sWorld Chat System is disabled.|r", WORLD_CHAT_RED.c_str());
