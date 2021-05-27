@@ -70,7 +70,7 @@ std::string world_chat_TeamIcon[2] =
 struct WCConfig
 {
     bool Enabled;
-    string ChannelName;
+    std::string ChannelName;
     bool LoginState;
     bool CrossFaction;
     bool Announce;
