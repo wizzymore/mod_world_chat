@@ -5,6 +5,7 @@
 #
 
 .directory
+.idea
 .mailmap
 *.orig
 *.rej

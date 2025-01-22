@@ -298,7 +298,7 @@ public:
 
     void OnChat(Player* player, uint32 /*type*/, uint32 lang, std::string& msg, Channel* channel)
     {
-        if (WC_Config.ChannelName != "" && lang != LANG_ADDON && channel->GetName() != WC_Config.ChannelName)
+        if (WC_Config.ChannelName != "" && lang != LANG_ADDON && channel->GetName() == WC_Config.ChannelName)
         {
             SendWorldMessage(player, msg, -1);
             msg = -1;
